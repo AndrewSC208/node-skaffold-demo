@@ -1,0 +1,18 @@
+apiVersion: skaffold/v1beta4
+kind: Config
+# specify how we want to build the docker image
+build:
+  artifacts:
+  - image: node-app
+  kaniko:
+    buildContext:
+      localDir: {}
+    namespace: default
+    cache: {}
+    flags:
+      - --single-snapshot
+   # Kaniko could be a config block that is added here 
+deploy:
+  kubectl:
+    manifests:
+    - k8s-app.yml
